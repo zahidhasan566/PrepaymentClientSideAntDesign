@@ -21,17 +21,10 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path="/" element={<DashBoard />} />
+					<Route path="/dashboard" element={<DashBoard />} />
 					<Route path="/sign-in" element={<Signin />} />
 					<Route path="/sign-up" element={<Signup />} />
 					<Route path="/sign-out" element={<Logout />} />
-					{/* <Route path="/post/:id" element={<PostView />} /> */}
-
-					{/* <Route element={<ProtectedRoutes/>}>
-						<Route path="/my-posts" element={<MyPost />} />
-						<Route path="/my-posts/edit/:id" element={<PostEdit />} />
-						<Route path="/post-create" element={<PostCreate />} />
-						<Route path="/my-profile" element={<MyProfile />} />
-					</Route> */}
 				</Routes>
 			</Router>
 			
