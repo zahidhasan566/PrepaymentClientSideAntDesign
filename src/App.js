@@ -20,11 +20,14 @@ function App() {
 		<Fragment>
 			<Router>
 				<Routes>
-					<Route path="/" element={<DashBoard />} />
-					<Route path="/dashboard" element={<DashBoard />} />
+					<Route path="/" element={<Signin />} />
 					<Route path="/sign-in" element={<Signin />} />
 					<Route path="/sign-up" element={<Signup />} />
+					
+					<Route element={<ProtectedRoutes/>}>
+					<Route path="/dashboard" element={<DashBoard />} />
 					<Route path="/sign-out" element={<Logout />} />
+					</Route>
 				</Routes>
 			</Router>
 			

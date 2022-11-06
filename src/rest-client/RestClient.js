@@ -6,9 +6,8 @@ class RestClient {
         var cors = {
             origin: `${process.env.BACKEND_ORIGIN_API}`
         }
-
         const token = localStorage.getItem("token");
-
+       
         return axios
             .get(url, {
                 headers: {

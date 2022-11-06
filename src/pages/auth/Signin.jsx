@@ -26,19 +26,18 @@ function Signin() {
 
 	const handleSubmit = async (e) => {
         e.preventDefault()
-
+		
         try {
             const res = await AuthService.signin(email, password)
 
             if(res.status == 200) {
-                navigate('/my-posts')
+                navigate('/dashboard')
 
                 toast.success('Logged in successfully')
             } else {
 				toast.error('Opps! something is wrong.')
 			}
         } catch (error) {
-            console.log(error);
             toast.error('Opps! something is wrong.')
         }
     }
@@ -98,7 +97,7 @@ function Signin() {
 
 					<Form.Item>
 						<Button type="primary" htmlType="submit" className="login-form-button" onClick={handleSubmit}>
-							Log in
+							Sign in
 						</Button>
 					</Form.Item>
 				</Form>
