@@ -2,7 +2,6 @@
 import { Column, Pie } from '@ant-design/plots';
 //Pie chart
 const DemoPie = (PieProps) => {
-    console.log(PieProps)
     let data = []
     if (PieProps.PieProps.length > 0) {
       PieProps.PieProps.map((PieData) => {
@@ -19,8 +18,6 @@ const DemoPie = (PieProps) => {
   
           data.push(pieobj)
         }
-        console.log(data)
-  
       });
       const pieconfig = {
         appendPadding: 10,

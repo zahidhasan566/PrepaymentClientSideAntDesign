@@ -14,6 +14,7 @@ import PostEdit from "./pages/post/PostEdit";
 import Signup from "./pages/auth/Signup";
 import MyProfile from "./pages/profile/MyProfile";
 import DashBoard from "./pages/Dashboard";
+import ExportItem from "./pages/Reports/exportItem";
 
 function App() {
 	return (
@@ -24,10 +25,11 @@ function App() {
 					<Route path="/sign-in" element={<Signin />} />
 					<Route path="/sign-up" element={<Signup />} />
 					
-					<Route element={<ProtectedRoutes/>}>
+					{/* <Route element={<ProtectedRoutes/>}> */}
 					<Route path="/dashboard" element={<DashBoard />} />
+					<Route path="/export-item" element={<ExportItem />} />
 					<Route path="/sign-out" element={<Logout />} />
-					</Route>
+					{/* </Route> */}
 				</Routes>
 			</Router>
 			

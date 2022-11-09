@@ -7,6 +7,7 @@ class RestClient {
             origin: `${process.env.BACKEND_ORIGIN_API}`
         }
         const token = localStorage.getItem("token");
+        // console.log(token)
        
         return axios
             .get(url, {

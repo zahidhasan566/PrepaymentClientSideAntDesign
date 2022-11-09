@@ -29,23 +29,8 @@ function DashBoard() {
 
   useEffect(() => {
     getData();
-  }, [PieData])
+  }, [PieData,dashboardData])
 
-
-  //For date Picker
-  const range = (start, end) => {
-    const result = [];
-    for (let i = start; i < end; i++) {
-      result.push(i);
-    }
-    return result;
-  };
-
-  // eslint-disable-next-line arrow-body-style
-  const disabledDate = (current) => {
-    // Can not select days before today and today
-    return current && current < moment().endOf('day');
-  };
 
   const onDateChange = async (dates, dateStrings) => {
     setFilterData(dateStrings)
@@ -73,6 +58,8 @@ function DashBoard() {
   }
 
 
+
+  //Show Graph Data
   const getData = async () => {
     setLoading(true)
     const url = `${process.env.REACT_APP_UPLOAD_URL}/backend-dashboard`
@@ -81,7 +68,6 @@ function DashBoard() {
       .then(result => {
         if (result.status == 200) {
           setDashboardData(result.data)
-          // console.log(dashboardData);
           setLoading(false)
         } else {
           setLoading(true)
@@ -154,13 +140,14 @@ function DashBoard() {
                         <RangePicker
                           format="YYYY-MM-DD HH:mm:ss"
                           onChange={onDateChange}
+                          style={{ float: "left" }}
                         />
                         <Button
                           type="primary"
                           onClick={getFilterData}
                           icon={<SearchOutlined />}
                           size="small"
-                          style={{ width: 90 }}
+                          style={{ width: 90, float: 'left' }}
                         >
                           Search
                         </Button>
@@ -193,10 +180,10 @@ function DashBoard() {
                 <div style={{ marginTop: "10px" }}>
                   <Card size="small" title="Latest Data Imported On " extra={<span style={{ background: '#73caec', padding: "3px", borderRadius: "5px", color: 'white' }}>{dashboardData.importedAtCreated}</span>} style={{ width: 'auto', borderRadius: "20px", borderTopColor: 'green' }}>
                     <div>
-                             {
+                      {
                         (() => {
-                          if (dashboardData.length> 0) {
-                            return    <p>The latest Transaction data that exist in the system is on   {dashboardData.latestOrderAt.local_order_date} </p>
+                          if (dashboardData.length > 0) {
+                            return <p>The latest Transaction data that exist in the system is on   {dashboardData.latestOrderAt.local_order_date} </p>
 
                           }
                           else {
@@ -204,11 +191,11 @@ function DashBoard() {
                           }
 
                         })()}
-                      
+
                       {
-                        // (dashboardData.latestOrderAt.local_order_date).length> 0  && (
-                        //   <p>The latest Transaction data that exist in the system is on   {dashboardData.latestOrderAt.local_order_date} </p>
-                        // )
+                        dashboardData.length> 0  && (
+                          <p>The latest Transaction data that exist in the system is on   {dashboardData.latestOrderAt.local_order_date} </p>
+                        )
                       }
 
                     </div>

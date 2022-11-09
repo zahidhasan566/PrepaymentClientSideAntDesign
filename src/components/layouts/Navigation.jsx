@@ -18,7 +18,7 @@ function Navigation() {
     let items = '';
     const { Header, Content, Footer, Sider } = Layout;
     const [collapsed, setCollapsed] = useState(false);
-    
+
 
     useEffect(() => {
         getTokenStatus()
@@ -36,15 +36,20 @@ function Navigation() {
     };
 
 
-    if(token && tokenStatus != 'user not found') {
-        items=[
+    if (token && tokenStatus != 'user not found') {
+        items = [
             // { title:"Prepayment",  key:"/", icon: <img src={Logo}  height={40} style={{paddingTop:0}}/>},
-            {label : "Dashboard",key:"/dashboard", icon: <DashboardOutlined/>},
-            {label : "Upload Data", key:"/dashboard2",icon: <FileOutlined/>},
-            {label : "User List", key:"/dashboard3", icon: <UnderlineOutlined/>},
-            {label : "Profile", key:"/dashboard4", icon: <UserOutlined/>},
-            {label : "signout", key:"/sign-out", icon: <PoweroffOutlined/>},
-            ]
+            { label: "Dashboard", key: "/dashboard", icon: <DashboardOutlined /> },
+            {
+                label: "Reports", icon: <FileOutlined />,
+                children: [{ label: 'Export Item', key: '/export-item' }],
+
+            },
+            { label: "Upload Data", icon: <FileOutlined /> },
+            { label: "User List", icon: <UnderlineOutlined /> },
+            { label: "Profile", icon: <UserOutlined /> },
+            { label: "signout", key: "/sign-out", icon: <PoweroffOutlined /> },
+        ]
     } else {
         return <Spinner />
     }
@@ -52,15 +57,15 @@ function Navigation() {
     // if(loading) {
     //     return <Spinner />
     // }
-    
+
     return (
-             <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
-              <div className="logo">
-                <img src={Logo}  height={60}/>
-                    <p >Daraz Prepayment</p>
-              </div>
-                <Menu theme="dark" onClick={onClick} selectedKeys={[current]} defaultSelectedKeys={['1']} mode="inline" items={items} />
-            </Sider>
+        <Sider collapsible collapsed={collapsed} onCollapse={value => setCollapsed(value)}>
+            <div className="logo">
+                <img src={Logo} height={60} />
+                <p >Daraz Prepayment</p>
+            </div>
+            <Menu theme="dark" onClick={onClick} selectedKeys={[current]} defaultSelectedKeys={['1']} mode="inline" items={items} />
+        </Sider>
     )
 }
 

@@ -3,7 +3,7 @@ class AppUrl {
 
     static authSignin = this.baseUrl + '/auth-login'
     static authSignup = this.baseUrl + '/api/login'
-    static validateToken = this.baseUrl + '/auth/validate-token'
+    // static validateToken = this.baseUrl + '/auth/validate-token'
     static myProfile = this.baseUrl + '/auth/user-profile'
 
     static post = this.baseUrl + '/post'
