@@ -1,7 +1,12 @@
 import { Button, Col, List, Row, Space, Tooltip, Typography, Card, Avatar, Tag, Badge, DatePicker, DatePickerProps, Table } from 'antd';
+import React, { Fragment, useState, useEffect } from 'react'
+import Spinner from '../../components/utils/Spinner'
 
 function DataTableIndex(props) {
   let allTitiles = props.titles
+  let totalPages = props.totalPages
+  const [loading, setLoading] = useState(false)
+
 
 
 
@@ -13,8 +18,9 @@ function DataTableIndex(props) {
     let ReportDatas = props.reportData
     if (ReportDatas) {
       let initialReportDatas = ReportDatas.data
-      console.log(initialReportDatas);
+      // setTotalPages(initialReportDatas.total)
       if (initialReportDatas) {
+        // setTotalPages(initialReportDatas.total
         let finalReportData = initialReportDatas.data
         finalReportData.map((singleReportData) => {
           let singleReportDataobj;
@@ -63,43 +69,39 @@ function DataTableIndex(props) {
     }
   });
 
+  // const [page, setPage] = useState(1)
+  // const [pageSize,setPageSize] = useState(3)
 
+  if(loading) {
+    return <Spinner />
+  }
 
+  return (
+  <Table dataSource={dataSource} columns={customColumn} 
+    pagination={{
+      // current:page,
+    pageSize:5,
+    // total: totalPages,
+    total: props.totalPages,
+    onChange: (page) => {
+      // setLoading(true)
+      // console.log('loader callwed');
+      props.getReportData(page)
+     
 
-  // const columns = [
-  //   {
-  //     title: 'Order Date',
-  //     dataIndex: 'Order Date',
-  //     key: 'Order Date',
-  //   },
-  //   {
-  //     title: 'Transaction',
-  //     dataIndex: 'Transaction',
-  //     key: 'Transaction',
-  //   },
-  //   {
-  //     title: 'Credit Card No',
-  //     dataIndex: 'Credit Card No',
-  //     key: 'Credit Card No',
-  //   },
-  //   {
-  //     title: 'Order Number',
-  //     dataIndex: 'Order Number',
-  //     key: 'Order Number',
-  //   },
-  //   {
-  //     title: 'PGW',
-  //     dataIndex: 'PGW',
-  //     key: 'PGW',
-  //   },
-  //   {
-  //     title: 'Paid - Tk',
-  //     dataIndex: 'Paid - Tk',
-  //     key: 'Paid - Tk',
-  //   },
-  // ];
+}
+    // showTotal: (total, range) => `${range[0]} - ${range[1]} / ${total}`,
 
-  return <Table dataSource={dataSource} columns={customColumn} />;
+    //client side data
+    // onChange: (page,pageSize) => {
+    //       setPage(page)
+    //       setPageSize(pageSize)
+
+    // }
+  
+  }}
+    >
+    </Table>);
 }
 
 export default DataTableIndex

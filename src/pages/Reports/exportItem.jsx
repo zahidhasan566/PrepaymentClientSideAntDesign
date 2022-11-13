@@ -1,6 +1,6 @@
 import { Button, Input, Select, Col, List, Row, Space, Tooltip, Typography, Card, Avatar, Tag, Badge, DatePicker, DatePickerProps } from 'antd';
 import { Column, Pie } from '@ant-design/plots';
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, DownloadOutlined } from "@ant-design/icons";
 import React, { Fragment, useState, useEffect } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
@@ -12,6 +12,10 @@ import moment from 'moment';
 import DemoColumn from '../../components/charts/graph';
 import DemoPie from '../../components/charts/pie';
 import DataTableIndex from '../../components/DataTable';
+import Pagination from 'antd';
+import { CSVLink, CSVDownload } from "react-csv";
+import FileSaver from 'file-saver';
+import * as XLSX from "xlsx";
 const { Text, Link } = Typography;
 
 
@@ -35,6 +39,10 @@ function ExportItem() {
 
     });
     const [ReportData, setReportData] = useState([])
+    const [totalPages, setTotalPages] = useState([])
+    const [csvdData, setCsvdData] = useState('')
+    let page =1;
+
 
     // Set Datatable Datas
 
@@ -45,7 +53,7 @@ function ExportItem() {
 
     useEffect(() => {
         getData();
-    }, [ReportData])
+    }, [totalPages])
 
     const handleChange = (name, value) => {
         setReportFilterData({
@@ -78,15 +86,67 @@ function ExportItem() {
     }
 
     // After Data
-    const getReportData = async () => {
+    const getReportData = async (page) => {
         setLoading(true)
-        const url = `${process.env.REACT_APP_UPLOAD_URL}/backend-transaction-report`
-
+        const url = `${process.env.REACT_APP_UPLOAD_URL}/backend-transaction-report?page=${page}&size=10`
+        console.log(url);
+        setLoading(true)
         return await RestClient.postRequest(url, ReportFilterData)
             .then(result => {
                 if (result.status == 200) {
                     setLoading(false)
                     setReportData(result.data)
+                    if (result.data.data) {
+                        setTotalPages(result.data.data.total)
+                    }
+                    // myLoader(false)
+                } else {
+                    setLoading(true)
+                    toast.error(result.response.data)
+                    toast.error('Something is wrong! Please sign-in again')
+                }
+            })
+            .catch(function (error) {
+                setLoading(true)
+                toast.error('Opps! Something is wrong with server')
+                console.log(error);
+            });
+    }
+
+
+    const downloadPendingData = async (csvdData) => {
+        console.log(csvdData);
+        // const csvData2 = new Blob([JSON.stringify(csvdData)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+        // FileSaver.saveAs(csvData2, "Report.xls");
+        const fileType =
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+      const fileExtension = ".xlsx";
+      const ws = XLSX.utils.json_to_sheet(csvdData);
+      const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+      const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      const data = new Blob([excelBuffer], { type: fileType });
+      FileSaver.saveAs(data, "Transiction Report" + fileExtension);
+    }
+
+    // Download Csv
+    const downloadReportData = async () => {
+        // const csv = convertContactsToCSV(ReportFilterData);
+        // const csvData = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+        // FileSaver.saveAs(csvData, 'data.csv');
+        setLoading(true)
+        const url = `${process.env.REACT_APP_UPLOAD_URL}/backend-report-exporting`
+        setLoading(true)
+        return await RestClient.postRequest(url, ReportFilterData)
+            .then(result => {
+                if (result.status == 200) {
+                    setLoading(false)
+                    // console.log(result.data.data);
+                    // setCsvdData(result.data.data)
+                    downloadPendingData(result.data.data)
+                    // console.log(csvdData);
+
                 } else {
                     setLoading(true)
                     toast.error(result.response.data)
@@ -217,15 +277,26 @@ function ExportItem() {
                                 icon={<SearchOutlined />}
                                 size="medium"
                                 style={{ width: 120 }}
-                                onClick={getReportData}
+                                onClick={() => getReportData(page)}
                             >
                                 Search
                             </Button>
+                            <Button
+                                type="primary"
+                                icon={<DownloadOutlined />}
+                                size="medium"
+                                style={{ width: 120, marginLeft: 5, background: 'green', border: 'green' }}
+                                onClick={downloadReportData}
+                            >
+                                Download
+                            </Button>
+                               {/* <CSVLink data={csvdData} onClick={downloadReportData} type="primary" >
+                                Download CSV
+                            </CSVLink> */}
                         </div>
                     </div>
 
-
-                    <DataTableIndex reportData={ReportData} titles={title} />
+                    <DataTableIndex reportData={ReportData} titles={title} getReportData={getReportData} totalPages={totalPages} />
                 </div>
             </MasterLayout>
         </Fragment>

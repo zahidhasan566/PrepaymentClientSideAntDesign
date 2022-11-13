@@ -54,6 +54,50 @@ class RestClient {
                 return error
             })
     }
+    
+    static postDownloadRequest = async  (url, postData) => {
+        var cors = {
+            origin: `${process.env.BACKEND_ORIGIN_API}`
+        }
+
+        const token = localStorage.getItem("token");
+
+        let config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': cors.origin,
+                'x-access-token': JSON.parse(token)
+            }
+        }
+
+        return axios
+            .post(url, postData, config)
+            .then(response => {
+                return response
+            })
+            .catch(error => {
+                console.log(error.response.data);
+                if(error.response.data == 'Invalid Token') {
+                    //toast.success('Please login first')
+                    window.location.href = process.env.DOMAIN;
+                }
+                return error
+            })
+        // return axios({
+        //     url: url,
+        //     method: 'POST',
+        //     responseType: 'blob', // important
+        //   }).post(url, postData, config).then((response) => {
+        //     console.log(response);
+        //      const url = window.URL.createObjectURL(new Blob([response.data]));
+        //      const link = document.createElement('a');
+        //      link.href = url;
+        //      link.setAttribute('download', 'file.csv'); //or any other extension
+        //      document.body.appendChild(link);
+        //      link.click();
+        //   });
+
+    }
 
     static deleteRequest = (url, postData) => {
         var cors = {
