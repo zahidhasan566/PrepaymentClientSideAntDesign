@@ -20,15 +20,16 @@ function Navigation() {
     const [collapsed, setCollapsed] = useState(false);
 
 
+
     useEffect(() => {
-        getTokenStatus()
+        // getTokenStatus()
     }, [])
 
-    const getTokenStatus = async () => {
-        const response = await RestClient.getRequest(AppUrl.validateToken)
-        setTokenStatus(response.data)
-        setLoading(false)
-    }
+    // const getTokenStatus = async () => {
+    //     const response = await RestClient.getRequest(AppUrl.validateToken)
+    //     setTokenStatus(response.data)
+    //     setLoading(false)
+    // }
 
     const onClick = (e) => {
         setCurrent(e.key);
@@ -36,7 +37,7 @@ function Navigation() {
     };
 
 
-    if (token && tokenStatus != 'user not found') {
+    if (token) {
         items = [
             // { title:"Prepayment",  key:"/", icon: <img src={Logo}  height={40} style={{paddingTop:0}}/>},
             { label: "Dashboard", key: "/dashboard", icon: <DashboardOutlined /> },

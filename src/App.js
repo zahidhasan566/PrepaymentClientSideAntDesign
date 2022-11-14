@@ -25,11 +25,11 @@ function App() {
 					<Route path="/sign-in" element={<Signin />} />
 					<Route path="/sign-up" element={<Signup />} />
 					
-					{/* <Route element={<ProtectedRoutes/>}> */}
+			
 					<Route path="/dashboard" element={<DashBoard />} />
 					<Route path="/export-item" element={<ExportItem />} />
 					<Route path="/sign-out" element={<Logout />} />
-					{/* </Route> */}
+				
 				</Routes>
 			</Router>
 			

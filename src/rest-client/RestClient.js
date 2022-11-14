@@ -6,22 +6,25 @@ class RestClient {
         var cors = {
             origin: `${process.env.BACKEND_ORIGIN_API}`
         }
-        const token = localStorage.getItem("token");
-        // console.log(token)
-       
+        // const token1 = localStorage.getItem("token");
+        // console.log(token1);
+        const token = "Bearer " + JSON.parse(localStorage.getItem("token"))
         return axios
             .get(url, {
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': cors.origin,
-                    'x-access-token': JSON.parse(token)
+                    'Authorization': `${token}`,
                 }
             })
             .then(response => {
                 return response
+
             })
             .catch(error => {
+                console.log(error);
                 return error
+               
             })
     }
 
@@ -36,7 +39,8 @@ class RestClient {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': cors.origin,
-                'x-access-token': JSON.parse(token)
+                'x-access-token': JSON.parse(token)   
+
             }
         }
 

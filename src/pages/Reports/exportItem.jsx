@@ -115,7 +115,6 @@ function ExportItem() {
 
 
     const downloadPendingData = async (csvdData) => {
-        console.log(csvdData);
         // const csvData2 = new Blob([JSON.stringify(csvdData)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 
         // FileSaver.saveAs(csvData2, "Report.xls");
