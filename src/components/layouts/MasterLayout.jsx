@@ -13,15 +13,21 @@ const MasterLayout =({children}) =>{
     const { Header, Content, Footer, Sider } = Layout;
     return(
         <>
+          {/* Header */}
+          <Header className="site-layout-background" style={{ padding: 0 }} >
+                          <Masterheader/>
+                        </Header>
             <Layout style={{ minHeight: '100vh' }}>
                 {/* Sider Menu */}
+
+                
                 <Navigation/>
                      <Layout className="site-layout">
 
                         {/* Header */}
-                         <Header className="site-layout-background" style={{ padding: 0 }} >
+                         {/* <Header className="site-layout-background" style={{ padding: 0 }} >
                           <Masterheader/>
-                        </Header>
+                        </Header> */}
 
                          {/* Main Content */}
                         <Content style={{ margin: '0 16px' }}>

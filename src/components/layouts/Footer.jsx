@@ -4,7 +4,7 @@ function Footer() {
     return (
         <div
         >
-           Ant Design ©2018 Created by Ant UED
+           Preapyment ©2023 Created by Daraz Bangladesh Limited
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { Button, Col, List, Row, Space, Tooltip, Typography, Card, Avatar, Tag, Badge, DatePicker, DatePickerProps } from 'antd';
+import { Breadcrumb,Button, Col, List, Row, Space, Tooltip, Typography, Card, Avatar, Tag, Badge, DatePicker, DatePickerProps } from 'antd';
 import { Column, Pie } from '@ant-design/plots';
 import { SearchOutlined } from "@ant-design/icons";
 import React, { Fragment, useState, useEffect } from 'react'
@@ -84,6 +84,9 @@ function DashBoard() {
   return (
     <Fragment>
       <MasterLayout>
+      <Breadcrumb style={{ margin: '16px 0' }}>
+        <Breadcrumb.Item>DashBoard Data</Breadcrumb.Item>
+      </Breadcrumb>
         <div style={{ marginTop: 20 }}>
           <div>
             <div className='row'>

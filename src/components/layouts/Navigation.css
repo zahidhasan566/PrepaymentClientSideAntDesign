@@ -1,5 +1,55 @@
+.ant-pro-global-header{
+  position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+    background-color: #001529;
+    box-shadow: 0 1px 4px rgb(0 21 41 / 8%);
+}
+.ant-layout-header{
+  padding: 0px !important;
+  height: 48px !important;
+  line-height: 48px !important;
+  width: 100% !important;
+  z-index: 100 !important;
+  right: 0px !important;
+
+}
+
+.headerTitle{
+  height: 32px;
+    margin: 0 0 0 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 32px;
+}
+.ant-pro-global-header-logo{
+  position: relative;
+  overflow: hidden;
+}
+.ant-pro-global-header-logo a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.right___3L8KG {
+  display: flex;
+  float: right;
+  height: 48px;
+  margin-left: auto;
+  overflow: hidden;
+}
+.ant-space-align-center {
+  align-items: center;
+}
+
+
+
 .logo {
   padding: 18px;
+  background: #001529;
   /* background: url(../../assets/Daraz.png); */
   /* width: 1005;
   height:100px;
@@ -9,7 +59,8 @@
 
   }
   .logo p{
-    color: white;
+    /* color: #141414; */
+    color: #fff;
     font-size: 20px;
   }
   .site-layout .site-layout-background {
@@ -17,9 +68,17 @@
   }
     [data-theme="dark"] .site-layout .site-layout-background {
       background: #141414;
+      /* background: #fff; */
     }
 
     .ant-layout-sider {
       box-shadow: 0 14px 28px rgb(0 0 0 / 63%), 0 10px 10px rgb(0 0 0 / 66%) !important;
+  }
+  .ant-layout-sider-trigger{
+    background: #001529 !important;
+    color: #fff !important;
+  }
+  .ant-layout-sider-children{
+    background: #001529 !important;
   }
   

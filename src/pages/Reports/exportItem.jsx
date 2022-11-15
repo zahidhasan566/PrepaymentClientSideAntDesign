@@ -1,4 +1,4 @@
-import { Button, Input, Select, Col, List, Row, Space, Tooltip, Typography, Card, Avatar, Tag, Badge, DatePicker, DatePickerProps } from 'antd';
+import { Breadcrumb,Button, Input, Select, Col, List, Row, Space, Tooltip, Typography, Card, Avatar, Tag, Badge, DatePicker, DatePickerProps } from 'antd';
 import { Column, Pie } from '@ant-design/plots';
 import { SearchOutlined, DownloadOutlined } from "@ant-design/icons";
 import React, { Fragment, useState, useEffect } from 'react'
@@ -41,7 +41,7 @@ function ExportItem() {
     const [ReportData, setReportData] = useState([])
     const [totalPages, setTotalPages] = useState([])
     const [csvdData, setCsvdData] = useState('')
-    let page =1;
+    let page = 1;
 
 
     // Set Datatable Datas
@@ -119,13 +119,13 @@ function ExportItem() {
 
         // FileSaver.saveAs(csvData2, "Report.xls");
         const fileType =
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
-      const fileExtension = ".xlsx";
-      const ws = XLSX.utils.json_to_sheet(csvdData);
-      const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
-      const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
-      const data = new Blob([excelBuffer], { type: fileType });
-      FileSaver.saveAs(data, "Transiction Report" + fileExtension);
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+        const fileExtension = ".xlsx";
+        const ws = XLSX.utils.json_to_sheet(csvdData);
+        const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+        const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+        const data = new Blob([excelBuffer], { type: fileType });
+        FileSaver.saveAs(data, "Transiction Report" + fileExtension);
     }
 
     // Download Csv
@@ -166,6 +166,10 @@ function ExportItem() {
     return (
         <Fragment>
             <MasterLayout>
+                <Breadcrumb style={{ margin: '16px 0' }}>
+                    <Breadcrumb.Item>Reports</Breadcrumb.Item>
+                    <Breadcrumb.Item>Export Data</Breadcrumb.Item>
+                </Breadcrumb>
                 <div style={{ marginTop: 20 }}>
                     <div className='row'>
                         <div className='col-md-3'>
@@ -289,7 +293,7 @@ function ExportItem() {
                             >
                                 Download
                             </Button>
-                               {/* <CSVLink data={csvdData} onClick={downloadReportData} type="primary" >
+                            {/* <CSVLink data={csvdData} onClick={downloadReportData} type="primary" >
                                 Download CSV
                             </CSVLink> */}
                         </div>
